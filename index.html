@@ -76,11 +76,32 @@
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '496887613828582',
+      appId      : '1039481722784400',
       xfbml      : true,
       version    : 'v2.5'
     });
   };
+  function onLogin(response) {
+  if (response.status == 'connected') {
+    FB.api('/me?fields=first_name', function(data) {
+      var welcomeBlock = document.getElementById('fb-welcome');
+      welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+    });
+  }
+}
+
+FB.getLoginStatus(function(response) {
+  // Check login status on load, and if the user is
+  // already logged in, go directly to the welcome message.
+  if (response.status == 'connected') {
+    onLogin(response);
+  } else {
+    // Otherwise, show Login dialog first.
+    FB.login(function(response) {
+      onLogin(response);
+    }, {scope: 'user_friends, email'});
+  }
+});
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
@@ -90,7 +111,7 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-
+<h1 id="fb-welcome"></h1>
 <div class="container">
     <h2>Bet-Dice Click Speed Test</h2>
     <h3>Clicks: <span id="clicks">0</span></h3>     <h3 id="countdown" class="text-center"></h3>
