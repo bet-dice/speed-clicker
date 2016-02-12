@@ -72,6 +72,25 @@
 
 </head>
 <body>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '496887613828582',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div class="container">
     <h2>Bet-Dice Click Speed Test</h2>
     <h3>Clicks: <span id="clicks">0</span></h3>     <h3 id="countdown" class="text-center"></h3>
@@ -81,4 +100,10 @@
     <button id="reset" type="button" class="btn btn-default" style="display:none;">
         Restart Test
     </button>
+    <div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 </div>
